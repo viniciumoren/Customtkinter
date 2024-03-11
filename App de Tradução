@@ -1,0 +1,42 @@
+import customtkinter as ctk
+from deep_translator import GoogleTranslator
+
+ctk.set_appearance_mode('dark')
+ctk.set_default_color_theme('green')
+
+janela = ctk.CTk()
+janela.minsize(500,400)
+janela.maxsize(600,400)
+janela.title('Tradutor Universal V1.0')
+
+ctk.CTkLabel(janela, text='Tradutor Universal V1.0', font=('Arial',25,'bold'), text_color='green').pack(anchor=ctk.CENTER, pady=5)
+
+app_frame = ctk.CTkFrame(janela, width=500, height=500, fg_color='transparent')
+# frame é uma div
+app_frame.pack(fill=ctk.X, padx=20, pady=10)
+# preencher o eixo x, ocupa a janela toda
+
+ctk.CTkLabel(app_frame, text='Texto para Traduzir', font=('Arial',18,'bold')).pack(fill=ctk.X)
+# texto
+
+user_text = ctk.CTkEntry(app_frame, placeholder_text='Digite o texto para traduzir', height=50)
+# input
+user_text.pack(fill=ctk.X)
+
+ctk.CTkLabel(app_frame, text='Escolha o idioma à traduzir').pack(pady=5)
+
+lang_to_var = ctk.StringVar(value='english')
+lang_list = GoogleTranslator().get_supported_languages()
+lang_to = ctk.CTkOptionMenu(app_frame, values=lang_list, variable=lang_to_var, dropdown_hover_color='green')
+lang_to.set('english')
+lang_to.pack(pady=5)
+
+ctk.CTkLabel(app_frame, text='Texto Traduzido', font=('Arial',18,'bold')).pack(fill=ctk.X)
+
+translate_text = ctk.CTkEntry(app_frame, placeholder_text='O texto traduzido será mostrado aqui', height=100, placeholder_text_color='gray')
+translate_text.pack(fill=ctk.X)
+
+translate_btn = ctk.CTkButton(app_frame, text='Traduzir', font=('Arial',18,'bold'))
+translate_btn.pack(fill=ctk.X,pady=10)
+
+janela.mainloop()
